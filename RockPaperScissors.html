@@ -8,7 +8,40 @@
 </head>
 <body>
     
-    
+    <h1>Rock, Paper, Scissors</h1>
+    <br>
+    <button onclick="
+    const cChoice = ComputersChoice();
+    const result = PlayersChoice('Rock', cChoice);
+    alert(`Computer choose: ${cChoice}, ${result}!
+Wins: ${score.wins} Ties: ${score.ties} Losses: ${score.losses}`)
+    console.log(result);
+
+    ">Rock</button>
+
+    <button onclick="
+    cChoice = ComputersChoice();
+    result = PlayersChoice('Paper', cChoice);
+    alert(`Computer choose: ${cChoice}, ${result}!
+Wins: ${score.wins} Ties: ${score.ties} Losses: ${score.losses}`)
+    console.log(result);
+    ">Paper</button>
+
+    <button onclick="
+    cChoice = ComputersChoice();
+    result = PlayersChoice('Scissors', cChoice);
+    alert(`Computer choose: ${cChoice}, ${result}!
+Wins: ${score.wins} Ties: ${score.ties} Losses: ${score.losses}`)
+    console.log(result);
+    ">Scissors</button>
+
+    <button onclick="
+    score.losses = 0;
+    score.wins = 0;
+    score.ties = 0;
+    alert(`Score has been reseted`)
+    ">Reset Score</button>
+
 
 
 
@@ -18,7 +51,77 @@
 
 
     <script>
+
+        const score = {
+            wins: 0,
+            losses: 0,
+            ties: 0
+        };
+
+
+
+
+
+        function ComputersChoice(){
+
+            const choice = Math.floor(Math.random() * 3);
+            let choiceStr = '';
+            if(choice === 0)
+                choiceStr = 'Rock';
+            if(choice === 1)
+                choiceStr = 'Paper';
+            if(choice === 2)
+                choiceStr = 'Scissors';
+
+            return choiceStr;
+        }
+
+        function PlayersChoice(playersChoise, computersChoice){
+            
+            let result = "";
+            if(playersChoise === "Rock"){
+
+                if(computersChoice === "Rock")
+                    result = "Tie";
+                else if(computersChoice === "Paper")
+                    result = "Lose";
+                else if(computersChoice === "Scissors")
+                    result = "Win";
+            }
+
+            else if(playersChoise === "Paper"){
+
+                if(computersChoice === "Rock")
+                    result = "Win";
+                else if(computersChoice === "Paper")
+                    result = "Tie";
+                else if(computersChoice === "Scissors")
+                    result = "Lose";
+                }
+            
+            else if(playersChoise === "Scissors"){
+
+                if(computersChoice === "Rock")
+                    result = "Lose";
+                else if(computersChoice === "Paper")
+                    result = "Win";
+                else if(computersChoice === "Scissors")
+                    result = "Tie";
+                }
+
+            if(result === "Win")
+            score.wins ++;
+            else if(result === "Lose")
+            score.losses ++;
+            else if(result === "Tie")
+            score.ties ++;
+
+
+            return result;
         
+
+
+        }
 
 
 
