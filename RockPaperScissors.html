@@ -11,36 +11,31 @@
     <h1>Rock, Paper, Scissors</h1>
     <br>
     <button onclick="
-    const cChoice = ComputersChoice();
-    const result = PlayersChoice('Rock', cChoice);
-    alert(`Computer choose: ${cChoice}, ${result}!
-Wins: ${score.wins} Ties: ${score.ties} Losses: ${score.losses}`)
-    console.log(result);
+
+    play('Rock');
 
     ">Rock</button>
 
     <button onclick="
-    cChoice = ComputersChoice();
-    result = PlayersChoice('Paper', cChoice);
-    alert(`Computer choose: ${cChoice}, ${result}!
-Wins: ${score.wins} Ties: ${score.ties} Losses: ${score.losses}`)
-    console.log(result);
+    play('Paper');
     ">Paper</button>
 
     <button onclick="
-    cChoice = ComputersChoice();
-    result = PlayersChoice('Scissors', cChoice);
-    alert(`Computer choose: ${cChoice}, ${result}!
-Wins: ${score.wins} Ties: ${score.ties} Losses: ${score.losses}`)
-    console.log(result);
+    play('Scissors');  
+
     ">Scissors</button>
 
+    <p class="js-result-text"></p>
+    <p class="js-choices-text"></p>
+    <p class="js-score-text"></p>
+
     <button onclick="
+
     score.losses = 0;
     score.wins = 0;
     score.ties = 0;
     localStorage.removeItem('score');
-    alert(`Score has been reseted`)
+    location.reload();
     ">Reset Score</button>
 
     <script>
@@ -51,13 +46,34 @@ Wins: ${score.wins} Ties: ${score.ties} Losses: ${score.losses}`)
             ties: 0
         }
 
-        // if(!score) {
-        //     score = {
-        //         wins: 0,
-        //         losses: 0,
-        //         ties: 0
-        //     }
-        // };
+
+        function play(choice){
+            const cChoice = ComputersChoice();
+            const result = PlayersChoice(choice, cChoice);
+            showResult(result);
+            showChoices(choice, cChoice);
+            showScore();
+        }
+
+        function showResult(result) {
+            const buttonLm = document.querySelector('.js-result-text');
+            buttonLm.innerText = 'You ' + result;
+        }
+
+        function showChoices(pChoice, cChoice) {
+            const buttonLm = document.querySelector('.js-choices-text');
+            buttonLm.innerText = 'Player: ' + pChoice +
+            ' | Computer: '+cChoice;
+        }
+
+        function showScore(result) {
+            const buttonLm = document.querySelector('.js-score-text');
+            buttonLm.innerText = 'Wins: ' + score.wins
+                + ' Loses: ' + score.losses 
+                + ' Ties: ' + score.ties;
+        }
+
+
 
         function ComputersChoice(){
 
