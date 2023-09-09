@@ -5,29 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="Styles/rock-paper-scissors.css">
 </head>
 <body>
     
-    <h1>Rock, Paper, Scissors</h1>
+    <h1 class="h1-title">Rock, Paper, Scissors</h1>
     <br>
     <button onclick="
 
     play('Rock');
 
-    ">Rock</button>
+    " class="move-btn"><img src="images/rock.png" class="move-icon"></button>
 
     <button onclick="
     play('Paper');
-    ">Paper</button>
+    "
+    class="move-btn"><img src="images/paper.png" class="move-icon"></button>
 
     <button onclick="
     play('Scissors');  
 
-    ">Scissors</button>
+    "
+    class="move-btn"><img src="images/scissors.png" class="move-icon"></button>
 
-    <p class="js-result-text"></p>
-    <p class="js-choices-text"></p>
-    <p class="js-score-text"></p>
+    <p class="js-result-text result"></p>
+    <p class="js-choices-text choices"></p>
+    <p class="js-score-text score"></p>
 
     <button onclick="
 
@@ -36,111 +39,9 @@
     score.ties = 0;
     localStorage.removeItem('score');
     location.reload();
-    ">Reset Score</button>
+    "
+    class="reset-btn">Reset Score</button>
 
-    <script>
-
-        let score = JSON.parse(localStorage.getItem('score')) || {
-            wins: 0,
-            losses: 0,
-            ties: 0
-        }
-
-
-        function play(choice){
-            const cChoice = ComputersChoice();
-            const result = PlayersChoice(choice, cChoice);
-            showResult(result);
-            showChoices(choice, cChoice);
-            showScore();
-        }
-
-        function showResult(result) {
-            const buttonLm = document.querySelector('.js-result-text');
-            buttonLm.innerText = 'You ' + result;
-        }
-
-        function showChoices(pChoice, cChoice) {
-            const buttonLm = document.querySelector('.js-choices-text');
-            buttonLm.innerText = 'Player: ' + pChoice +
-            ' | Computer: '+cChoice;
-        }
-
-        function showScore(result) {
-            const buttonLm = document.querySelector('.js-score-text');
-            buttonLm.innerText = 'Wins: ' + score.wins
-                + ' Loses: ' + score.losses 
-                + ' Ties: ' + score.ties;
-        }
-
-
-
-        function ComputersChoice(){
-
-            const choice = Math.floor(Math.random() * 3);
-            let choiceStr = '';
-            if(choice === 0)
-                choiceStr = 'Rock';
-            if(choice === 1)
-                choiceStr = 'Paper';
-            if(choice === 2)
-                choiceStr = 'Scissors';
-
-            return choiceStr;
-        }
-
-        function PlayersChoice(playersChoise, computersChoice){
-            
-            let result = "";
-            if(playersChoise === "Rock"){
-
-                if(computersChoice === "Rock")
-                    result = "Tie";
-                else if(computersChoice === "Paper")
-                    result = "Lose";
-                else if(computersChoice === "Scissors")
-                    result = "Win";
-            }
-
-            else if(playersChoise === "Paper"){
-
-                if(computersChoice === "Rock")
-                    result = "Win";
-                else if(computersChoice === "Paper")
-                    result = "Tie";
-                else if(computersChoice === "Scissors")
-                    result = "Lose";
-                }
-            
-            else if(playersChoise === "Scissors"){
-
-                if(computersChoice === "Rock")
-                    result = "Lose";
-                else if(computersChoice === "Paper")
-                    result = "Win";
-                else if(computersChoice === "Scissors")
-                    result = "Tie";
-                }
-
-            if(result === "Win")
-            score.wins ++;
-            else if(result === "Lose")
-            score.losses ++;
-            else if(result === "Tie")
-            score.ties ++;
-
-            localStorage.setItem('score', JSON.stringify(score));
-            return result;
-            
-            
-
-
-        }
-        
-       
-
-
-
-    </script>
+    <script src="Scripts/rock-paper-scissors.js"></script>
 </body>
 </html>
